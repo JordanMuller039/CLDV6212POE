@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "File Share Storage";
+}
+
+<h2>File Share Storage - View and Add Files</h2>
+
+<!-- Display files -->
+<div id="file-list">
+    <h3>Files in Share</h3>
+    <ul id="file-share-container">
+        <!-- File list will be populated here -->
+    </ul>
+</div>
+
+<!-- Form to add a new file -->
+<div>
+    <h3>Add a New File</h3>
+    <form id="fileForm">
+        <input type="file" id="fileShare" required />
+        <button type="submit">Upload File</button>
+    </form>
+</div>
+
+<!-- JavaScript -->
+<script>
+    $(document).ready(function() {
+        fetchFiles();
+
+        $('#fileForm').on('submit', function(event) {
+            event.preventDefault();
+            var file = document.getElementById('fileShare').files[0];
+            var formData = new FormData();
+            formData.append('fileShare', file);
+
+            $.ajax({
+                url: '/FileShare/UploadFile',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    alert('File uploaded successfully');
+                    fetchFiles();
+                },
+                error: function() {
+                    alert('Error uploading file');
+                }
+            });
+        });
+
+        function fetchFiles() {
+            $.ajax({
+                url: '/FileShare/GetFiles',
+                type: 'GET',
+                success: function(files) {
+                    $('#file-share-container').empty();
+                    files.forEach(file => {
+                        $('#file-share-container').append('<li>' + file + '</li>');
+                    });
+                },
+                error: function() {
+                    alert('Error fetching files');
+                }
+            });
+        }
+    });
+</script>

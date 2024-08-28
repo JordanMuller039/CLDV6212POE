@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "Table Storage";
+}
+
+<h2>Table Storage - View and Add Records</h2>
+
+<!-- Display table records -->
+<div id="table-list">
+    <h3>Records in Table</h3>
+    <ul id="table-records">
+        <!-- Table records will be populated here -->
+    </ul>
+</div>
+
+<!-- Form to add a new record -->
+<div>
+    <h3>Add a New Record</h3>
+    <form id="tableForm">
+        <input type="text" id="partitionKey" placeholder="Partition Key" required />
+        <input type="text" id="rowKey" placeholder="Row Key" required />
+        <input type="text" id="propertyValue" placeholder="Property Value" required />
+        <button type="submit">Add Record</button>
+    </form>
+</div>
+
+<!-- JavaScript -->
+<script>
+    $(document).ready(function () {
+        fetchRecords();
+
+        $('#tableForm').on('submit', function (event) {
+            event.preventDefault();
+            var record = {
+                PartitionKey: $('#partitionKey').val(),
+                RowKey: $('#rowKey').val(),
+                PropertyValue: $('#propertyValue').val()
+            };
+
+            $.ajax({
+                url: '/Table/AddRecord',
+                type: 'POST',
+                data: JSON.stringify(record),
+                contentType: 'application/json',
+                success: function (response) {
+                    alert('Record added successfully');
+                    fetchRecords();
+                },
+                error: function () {
+                    alert('Error adding record');
+                }
+            });
+        });
+
+        function fetchRecords() {
+            $.ajax({
+                url: '/Table/GetRecords',
+                type: 'GET',
+                success: function (records) {
+                    $('#table-records').empty();
+                    records.forEach(record => {
+                        $('#table-records').append('<li>' + record.RowKey + ': ' + record.PropertyValue + '</li>');
+                    });
+                },
+                error: function () {
+                    alert('Error fetching records');
+                }
+            });
+        }
+    });
+</script>

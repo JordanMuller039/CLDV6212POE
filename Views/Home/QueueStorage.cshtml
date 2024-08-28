@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Queue Storage";
+}
+
+<h2>Queue Storage - View and Add Messages</h2>
+
+<!-- Display queue messages -->
+<div id="queue-list">
+    <h3>Messages in Queue</h3>
+    <ul id="queue-messages">
+        <!-- Queue messages will be populated here -->
+    </ul>
+</div>
+
+<!-- Form to add a new message -->
+<div>
+    <h3>Add a New Message</h3>
+    <form id="queueForm">
+        <input type="text" id="queueMessage" placeholder="Message" required />
+        <button type="submit">Add Message</button>
+    </form>
+</div>
+
+<!-- JavaScript -->
+<script>
+    $(document).ready(function () {
+        fetchMessages();
+
+        $('#queueForm').on('submit', function (event) {
+            event.preventDefault();
+            var message = $('#queueMessage').val();
+
+            $.ajax({
+                url: '/Queue/AddMessage',
+                type: 'POST',
+                data: JSON.stringify({ Message: message }),
+                contentType: 'application/json',
+                success: function (response) {
+                    alert('Message added successfully');
+                    fetchMessages();
+                },
+                error: function () {
+                    alert('Error adding message');
+                }
+            });
+        });
+
+        function fetchMessages() {
+            $.ajax({
+                url: '/Queue/GetMessages',
+                type: 'GET',
+                success: function (messages) {
+                    $('#queue-messages').empty();
+                    messages.forEach(message => {
+                        $('#queue-messages').append('<li>' + message + '</li>');
+                    });
+                },
+                error: function () {
+                    alert('Error fetching messages');
+                }
+            });
+        }
+    });
+</script>

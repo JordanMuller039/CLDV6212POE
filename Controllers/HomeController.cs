@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
-using SemesterTwo.Models;
-using SemesterTwo.Services;
-using System.Diagnostics;
+using ST10150702_CLDV6212_POE.Models;
+using ST10150702_CLDV6212_POE.Services;
+using ST10150702_CLDV6212_POE.Controllers;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
-namespace SemesterTwo.Controllers
+namespace ST10150702_CLDV6212_POE.Controllers
 {
     public class HomeController : Controller
     {
@@ -12,6 +13,7 @@ namespace SemesterTwo.Controllers
         private readonly TableService _tableService;
         private readonly QueueService _queueService;
         private readonly FileService _fileService;
+        private readonly ILogger<HomeController> _logger;
 
         public HomeController(BlobService blobService, TableService tableService, QueueService queueService, FileService fileService)
         {
@@ -26,13 +28,18 @@ namespace SemesterTwo.Controllers
             return View();
         }
 
+        public IActionResult Explain()
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> UploadImage(IFormFile file)
         {
             if (file != null)
             {
                 using var stream = file.OpenReadStream();
-                await _blobService.UploadBlobAsync("product-images", file.FileName, stream);
+                await _blobService.UploadBlobAsync("media", file.FileName, stream);
             }
             return RedirectToAction("Index");
         }
@@ -60,7 +67,7 @@ namespace SemesterTwo.Controllers
             if (file != null)
             {
                 using var stream = file.OpenReadStream();
-                await _fileService.UploadFileAsync("contracts-logs", file.FileName, stream);
+                await _fileService.UploadFileAsync("contracts", file.FileName, stream);
             }
             return RedirectToAction("Index");
         }

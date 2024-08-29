@@ -1,16 +1,14 @@
-﻿using Azure;
+﻿using System.Collections.Concurrent;
+using Azure;
 using Azure.Data.Tables;
 using System;
-
-namespace SemesterTwo.Models
+namespace ST10150702_CLDV6212_POE.Models
 {
-    public class CustomerProfile : ITableEntity
-    {
-        public string PartitionKey { get; set; }
-        public string RowKey { get; set; }
-        public DateTimeOffset? Timestamp { get; set; }
-        public ETag ETag { get; set; }
-
+    public class CustomerProfile : ITableEntity { public string PartitionKey { get; set; }
+    public string RowKey { get; set; }
+    public DateTimeOffset? Timestamp { get; set; }
+    public ETag ETag { get; set; }
+    
         // Custom properties
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -21,6 +19,6 @@ namespace SemesterTwo.Models
         {
             PartitionKey = "CustomerProfile";
             RowKey = Guid.NewGuid().ToString();
-        }
-    }
+        }    }
+
 }

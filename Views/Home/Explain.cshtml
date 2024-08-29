@@ -1,0 +1,100 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<!-- CSS STYLING -->
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+
+    .background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('/images/background-abcretailer.jpg');
+        background-repeat: repeat;
+        background-position: center;
+        opacity: 0.125;
+        z-index: -1;
+    }
+
+    .content {
+        position: relative;
+        z-index: 1;
+        padding: 20px;
+        color: #000;
+    }
+
+
+    .header {
+        display: flex;
+        justify-content: center; /* Centers horizontally */
+        align-items: center; /* Centers vertically */
+        text-align: center;
+        margin-bottom: -45px;
+    }
+
+    .h1 {
+        font-weight: bold;
+        font-family: 
+    }
+
+    .explain-icons {
+        display: flex;
+        justify-content: center; /* Centers the image horizontally */
+        align-items: center; /* Centers the image vertically if the div has a height */
+        margin-top: 0px; /* Optional: Adds space between the header and the image */
+    }
+
+        .explain-icons img {
+            max-width: 100%; /* Ensures the image scales with the screen */
+            height: auto; /* Maintains the aspect ratio of the image */
+        }
+
+    p1 {
+        font-weight: bold;
+    }
+
+    .blob {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: centre;
+    }
+
+</style>
+
+<!-- HTML CODING -->
+<div class="background"></div>
+<div class="content">
+
+      <div class="header">
+          <h1>Azure Storage Explained</h1>
+      </div>
+
+      <div class="explain-icons">
+          <img src="/images/storage-icons.png" />
+      </div>
+
+      <p1>Blob Storage</p1>
+      <p>Azure Blob Storage is a cloud-based service designed to store large amounts of unstructured data such as images, videos, and documents. It provides scalable storage, allowing businesses to manage and access their data efficiently. With built-in high availability and security features, Azure Blob Storage ensures that your data is always accessible and protected, making it ideal for applications that require the storage of large files and easy retrieval.</p>
+    
+
+      <p1>File Storage</p1>
+    <p>File storage refers to a system for saving and managing digital files, such as documents, images, and videos, on storage devices. It enables users and applications to store data in a structured manner, providing methods to organize, retrieve, and share files. File storage can be local, on a physical drive or server, or cloud-based, offering scalable and remote access through the internet. This approach is crucial for managing large amounts of data and ensuring its availability and security.</p>
+        
+    
+    <p1>Table Storage</p1>
+    <p>Azure Table Storage is a NoSQL cloud database service provided by Microsoft Azure, designed to store large amounts of structured data in a highly available and scalable manner.Azure Table Storage is cost-effective and supports robust querying capabilities, making it suitable for a variety of scenarios involving large-scale data storage.</p>
+    
+    
+    <p1>Queue Storage</p1>
+    <p>Azure Queue Storage is a cloud-based service that provides a reliable and scalable message queue for asynchronous communication between application components. It allows for the storage and retrieval of messages, which can be processed by different parts of an application independently.</p>
+</div>

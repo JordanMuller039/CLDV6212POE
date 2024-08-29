@@ -2,14 +2,11 @@
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using System.Threading.Tasks;
-
-
-namespace SemesterTwo.Services
+namespace ST10150702_CLDV6212_POE.Services
 {
     public class BlobService
     {
         private readonly BlobServiceClient _blobServiceClient;
-
         public BlobService(IConfiguration configuration)
         {
             _blobServiceClient = new BlobServiceClient(configuration["AzureStorage:ConnectionString"]);

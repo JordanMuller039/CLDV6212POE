@@ -1,9 +1,7 @@
-﻿using Azure;
-using Azure.Data.Tables;
-using SemesterTwo.Models;
+﻿using Azure.Data.Tables;
+using ST10150702_CLDV6212_POE.Models;
 using System.Threading.Tasks;
-
-namespace SemesterTwo.Services
+namespace ST10150702_CLDV6212_POE.Services
 {
     public class TableService
     {
@@ -22,4 +20,5 @@ namespace SemesterTwo.Services
             await _tableClient.AddEntityAsync(profile);
         }
     }
+
 }

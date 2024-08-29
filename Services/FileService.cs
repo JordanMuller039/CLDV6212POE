@@ -3,14 +3,11 @@ using Azure.Storage.Files.Shares.Models;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using System.Threading.Tasks;
-
-
-namespace SemesterTwo.Services
+namespace ST10150702_CLDV6212_POE.Services
 {
     public class FileService
     {
         private readonly ShareServiceClient _shareServiceClient;
-
         public FileService(IConfiguration configuration)
         {
             _shareServiceClient = new ShareServiceClient(configuration["AzureStorage:ConnectionString"]);
@@ -26,5 +23,4 @@ namespace SemesterTwo.Services
             await fileClient.UploadAsync(content);
         }
     }
-
 }

@@ -1,24 +1,117 @@
-﻿@model SemesterTwo.Models.CustomerProfile
+﻿@model ST10150702_CLDV6212_POE.Models.CustomerProfile
 
-<form asp-action="UploadImage" method="post" enctype="multipart/form-data">
-    <input type="file" name="file" />
-    <button type="submit">Upload Image</button>
-</form>
+<!-- CSS STYLING -->
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
 
-<form asp-action="AddCustomerProfile" method="post">
-    <input type="text" name="FirstName" placeholder="First Name" />
-    <input type="text" name="LastName" placeholder="Last Name" />
-    <input type="email" name="Email" placeholder="Email" />
-    <input type="text" name="PhoneNumber" placeholder="Phone Number" />
-    <button type="submit">Add Profile</button>
-</form>
+    p1, p2, p3, p4 {
+        font-weight: bold;
+    }
 
-<form asp-action="ProcessOrder" method="post">
-    <input type="text" name="orderId" placeholder="Order ID" />
-    <button type="submit">Process Order</button>
-</form>
+    p5,p6,p7,p8 {
+        font-style: italic;
+    }
 
-<form asp-action="UploadContract" method="post" enctype="multipart/form-data">
-    <input type="file" name="file" />
-    <button type="submit">Upload Contract</button>
-</form>
+    .background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('images/background-abcretailer.jpg');
+        background-repeat: repeat;
+        background-position: center;
+        opacity: 0.125; 
+        z-index: -1; 
+    }
+
+    .content {
+        position: relative;
+        z-index: 1;
+        padding: 20px;
+        color: #000; /* Adjust text color for visibility */
+    }
+
+    .header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+        .header img {
+            width: 6%; /* Scale image to 10% of its original size */
+            margin-right: 10px;
+
+    h1, p1, p2, p3, p4, form {
+        margin-bottom: 20px;
+    }
+
+        form input, form button {
+            margin-right: 10px;
+        }
+
+</style>
+
+<div class="background"></div>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<div class="content">
+    <div class="header">
+        <img src="images/Logo-512x512.png" alt="Logo" />
+        <h1>Retail Storage</h1>
+    </div>
+
+    <!-- BLOB STORAGE -->
+    <p1>Azure Blob Storage</p1>
+    <form asp-action="UploadImage" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" />
+        <button type="submit">Upload Image</button>
+    </form>
+    <p5>ABC Retail will now use Azure Blob Storage to securely store and easily access product images, ensuring they can handle high traffic during peak seasons.</p5>
+
+    <br />
+    <br />
+    <br />
+
+    <!-- TABLE STORAGE -->
+    <p2>Azure Table Storage</p2>
+    <form asp-action="AddCustomerProfile" method="post">
+        <input type="text" name="FirstName" placeholder="First Name" />
+        <input type="text" name="LastName" placeholder="Last Name" />
+        <input type="email" name="Email" placeholder="Email" />
+        <input type="text" name="PhoneNumber" placeholder="Phone Number" />
+        <button type="submit">Add Profile</button>
+    </form>
+    <p6>Customer profiles and product data will be managed in Azure Tables for fast, scalable access</p6>
+
+    <br />
+    <br />
+    <br />
+
+    <!-- QUEUE STORAGE -->
+    <p3>Azure Queue Storage</p3>
+    <form asp-action="ProcessOrder" method="post">
+        <input type="text" name="orderId" placeholder="Order ID" />
+        <button type="submit">Process Order</button>
+    </form>
+    <p7>Order processing will be handled by Azure Queues to ensure smooth transaction flow.</p7>
+
+    <br />
+    <br />
+    <br />
+
+    <!-- FILE SHARE -->
+    <p4>Azure File Share</p4>
+    <form asp-action="UploadContract" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" />
+        <button type="submit">Upload Contract</button>
+    </form>
+    <p8>Contracts will be stored in Azure Files, offering reliable and organized storage for important documents.</p8>
+</div>

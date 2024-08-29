@@ -67,7 +67,7 @@ namespace ST10150702_CLDV6212_POE.Controllers
             if (file != null)
             {
                 using var stream = file.OpenReadStream();
-                await _fileService.UploadFileAsync("contracts", file.FileName, stream);
+                await _fileService.UploadFileAsync("contracts-logs", file.FileName, stream);
             }
             return RedirectToAction("Index");
         }

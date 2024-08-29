@@ -1,4 +1,4 @@
-namespace ST10150702_CLDV6212_POE.Models
+namespace SemesterTwo.Models
 {
     public class ErrorViewModel
     {

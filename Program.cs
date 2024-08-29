@@ -1,6 +1,6 @@
-using ST10150702_CLDV6212_POE;
+using SemesterTwo.Services;
 
-namespace ST10150702_CLDV6212_POE
+namespace SemesterTwo
 {
     public class Program
     {
@@ -12,7 +12,7 @@ namespace ST10150702_CLDV6212_POE
             builder.Services.AddControllersWithViews();
 
             // Register your custom services
-            builder.Services.AddSingleton<BlobServices>();
+            builder.Services.AddSingleton<BlobService>();
             builder.Services.AddSingleton<TableService>();
             builder.Services.AddSingleton<QueueService>();
             builder.Services.AddSingleton<FileService>();
@@ -42,4 +42,3 @@ namespace ST10150702_CLDV6212_POE
         }
     }
 }
-    

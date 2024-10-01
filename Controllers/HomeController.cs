@@ -48,7 +48,14 @@ namespace ST10150702_CLDV6212_POE.Controllers
             try
             {
                 using var stream = file.OpenReadStream();
-                var result = await _httpClient.PostAsync(_blobFunctionUrl, new StreamContent(stream));
+                var blobName = file.FileName;  // Using the uploaded file's name as the blob name
+                var containerName = "media";  // You can replace this with your desired container name
+
+                // Append the containerName and blobName to the function URL
+                var url = $"{_blobFunctionUrl}&containerName={containerName}&blobName={blobName}";
+
+                // Send the request to Azure Function
+                var result = await _httpClient.PostAsync(url, new StreamContent(stream));
 
                 if (result.IsSuccessStatusCode)
                 {
@@ -67,6 +74,7 @@ namespace ST10150702_CLDV6212_POE.Controllers
                 return View("Index");
             }
         }
+
 
         // File Share Upload
         [HttpPost]

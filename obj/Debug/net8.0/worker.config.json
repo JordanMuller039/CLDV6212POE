@@ -1,0 +1,10 @@
+{
+  "description": {
+    "language": "dotnet-isolated",
+    "extensions": [ ".dll" ],
+    "defaultExecutablePath": "dotnet",
+    "defaultWorkerPath": "ST10150702_CLDV6212_POE.dll",
+    "workerIndexing": "true",
+    "canUsePlaceholder": true
+  }
+}

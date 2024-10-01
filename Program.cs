@@ -12,6 +12,9 @@ namespace SemesterTwo
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            // Register HttpClient for dependency injection
+            builder.Services.AddHttpClient();
+
             // Register your custom services
             builder.Services.AddSingleton<BlobService>();
             builder.Services.AddSingleton<TableService>();

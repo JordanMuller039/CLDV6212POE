@@ -1,4 +1,5 @@
-﻿@model ST10150702_CLDV6212_POE.Models.CustomerProfile
+﻿@model ST10150702_CLDV6212_POE.Models.IndexViewModel
+
 <!-- CSS STYLING -->
 <style>
     body, html {
@@ -34,9 +35,11 @@
     .container {
         flex: 1 0 auto;
         display: flex;
+        flex-direction: column;
         justify-content: center;
-        align-items: flex-start;
+        align-items: center; /* Center horizontally */
         padding: 20px;
+        gap: 30px; /* Space between the main container and the new containers */
     }
 
     .content {
@@ -88,7 +91,62 @@
         text-align: center;
         border-top: 1px solid #e7e7e7;
     }
+
+    /* Styles for the new containers */
+    .info-container {
+        background-color: white;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Same drop shadow */
+        margin-top: 30px; /* Add margin top to create space between the original container and new containers */
+        width: 90%;
+        max-width: 800px;
+    }
+
+        .info-container h2 {
+            margin-bottom: 20px;
+        }
+
+        .info-container form {
+            display: flex;
+            flex-direction: column;
+        }
+
+            .info-container form input {
+                margin-bottom: 10px;
+                padding: 10px;
+                border-radius: 5px;
+                border: 1px solid #ddd;
+            }
+
+            .info-container form button {
+                padding: 10px;
+                border-radius: 5px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+            }
+
+                .info-container form button:hover {
+                    background-color: #0056b3;
+                }
+
+    /* Additional styling for the background and page layout */
+    .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('images/background-abcretailer.jpg');
+        background-repeat: repeat;
+        background-position: center;
+        opacity: 0.125;
+        z-index: -1;
+    }
 </style>
+
+
 <div class="background"></div>
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -101,6 +159,7 @@
             <img src="images/Logo-512x512.png" alt="Logo" />
             <h1>Retail Storage</h1>
         </div>
+
         <!-- BLOB STORAGE -->
         <p1>Azure Blob Storage</p1>
         <form asp-action="UploadImage" method="post" enctype="multipart/form-data">
@@ -108,8 +167,8 @@
             <button type="submit">Upload Image</button>
         </form>
         <p5>ABC Retail will now use Azure Blob Storage to securely store and easily access product images, ensuring they can handle high traffic during peak seasons.</p5>
-        <br />
-        <br />
+        <br /><br />
+
         <!-- TABLE STORAGE -->
         <p2>Azure Table Storage</p2>
         <form asp-action="AddCustomerProfile" method="post">
@@ -120,8 +179,8 @@
             <button type="submit">Add Profile</button>
         </form>
         <p6>Customer profiles and product data will be managed in Azure Tables for fast, scalable access</p6>
-        <br />
-        <br />
+        <br /><br />
+
         <!-- QUEUE STORAGE -->
         <p3>Azure Queue Storage</p3>
         <form asp-action="ProcessOrder" method="post">
@@ -129,8 +188,8 @@
             <button type="submit">Process Order</button>
         </form>
         <p7>Order processing will be handled by Azure Queues to ensure smooth transaction flow.</p7>
-        <br />
-        <br />
+        <br /><br />
+
         <!-- FILE SHARE -->
         <p4>Azure File Share</p4>
         <form asp-action="UploadContract" method="post" enctype="multipart/form-data">
@@ -139,6 +198,48 @@
         </form>
         <p8>Contracts will be stored in Azure Files, offering reliable and organized storage for important documents.</p8>
     </div>
+
+    <!-- New Containers for Customer, Product, and Order Info -->
+    <!-- Customer Info Container -->
+    <div class="info-container">
+        <h2>Customer Info</h2>
+        <form asp-action="AddCustomer" method="post">
+            <input type="text" name="cName" placeholder="Customer Name" required />
+            <input type="text" name="cSurname" placeholder="Customer Surname" required />
+            <input type="email" name="cEmail" placeholder="Customer Email" required />
+            <input type="text" name="cContactNumber" placeholder="Contact Number" required />
+            <input type="number" name="cAge" placeholder="Age" required />
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <!-- Product Info Container -->
+    <div class="info-container">
+        <h2>Product Info</h2>
+        <form asp-action="AddProduct" method="post">
+            <input type="text" name="pName" placeholder="Product Name" required />
+            <input type="number" name="pPrice" placeholder="Product Price" step="0.01" required />
+            <input type="text" name="pType" placeholder="Product Type" required />
+            <input type="number" name="pStock" placeholder="Stock Quantity" required />
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <!-- Orders Info Container -->
+    <div class="info-container">
+        <h2>Orders</h2>
+        <form asp-action="AddOrder" method="post">
+            <input type="number" name="cID" placeholder="Customer ID" required />
+            <input type="number" name="pID" placeholder="Product ID" required />
+            <input type="number" name="oValue" placeholder="Order Value" step="0.01" required />
+            <input type="text" name="cName" placeholder="Customer Name" required />
+            <input type="text" name="pName" placeholder="Product Name" required />
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
 </div>
 
 <footer><br /></footer>
+

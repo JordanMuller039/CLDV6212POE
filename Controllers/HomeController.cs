@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using ST10150702_CLDV6212_POE.Models;
+using ST10150702_CLDV6212_POE.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace ST10150702_CLDV6212_POE.Controllers
 {
@@ -12,6 +14,7 @@ namespace ST10150702_CLDV6212_POE.Controllers
     {
         private readonly HttpClient _httpClient;
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context;
 
         // Function URLs
         private readonly string _blobFunctionUrl = "https://cldvst10150702.azurewebsites.net/api/UploadBlob?code=Ke-2Ie96H825ZFq5Y1INxO8JYPlbf4pP8O55fIbASgryAzFuQkJlnw%3D%3D";
@@ -19,21 +22,81 @@ namespace ST10150702_CLDV6212_POE.Controllers
         private readonly string _tableFunctionUrl = "https://cldvst10150702.azurewebsites.net/api/StoreTableInfo?code=Ke-2Ie96H825ZFq5Y1INxO8JYPlbf4pP8O55fIbASgryAzFuQkJlnw%3D%3D";
         private readonly string _queueFunctionUrl = "https://cldvst10150702.azurewebsites.net/api/ProcessQueueMessage?code=Ke-2Ie96H825ZFq5Y1INxO8JYPlbf4pP8O55fIbASgryAzFuQkJlnw%3D%3D";
 
-        public HomeController(HttpClient httpClient, ILogger<HomeController> logger)
+        public HomeController(HttpClient httpClient, ILogger<HomeController> logger, ApplicationDbContext context)
         {
             _httpClient = httpClient;
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var viewModel = new IndexViewModel
+            {
+                Customer = new Customer(),
+                Product = new Product(),
+                Order = new Order()
+            };
+            return View(viewModel);
         }
 
         public IActionResult Explain()
         {
             return View();
         }
+
+        /// <summary>
+        /// ==================================================================================
+        /// PART 3 WORK 
+        /// ==================================================================================
+        /// </summary>
+
+        // POST: Add Customer
+        [HttpPost]
+        public async Task<IActionResult> AddCustomer(Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Customers.Add(customer);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View("Index", new IndexViewModel { Customer = customer });
+        }
+
+        // POST: Add Product
+        [HttpPost]
+        public async Task<IActionResult> AddProduct(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Products.Add(product);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View("Index", new IndexViewModel { Product = product });
+        }
+
+        // Add a new order
+        [HttpPost]
+        public async Task<IActionResult> AddOrder(Order order)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Orders.Add(order);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View("Index", new IndexViewModel { Order = order });
+        }
+
+
+
+        /// <summary>
+        /// ==================================================================================
+        /// PART 2 WORK 
+        /// ==================================================================================
+        /// </summary>
 
         // Blob Storage Upload
         [HttpPost]
